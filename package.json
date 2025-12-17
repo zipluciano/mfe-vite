@@ -1,0 +1,38 @@
+{
+  "name": "mfe-vite-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Micro-Frontend demonstration with Vite, React, TypeScript, Tailwind and Zustand",
+  "scripts": {
+    "dev": "pnpm clean:ports && pnpm -r --parallel dev",
+    "dev:host": "pnpm --filter host dev",
+    "dev:remote-a": "pnpm --filter remote-a dev",
+    "dev:remote-b": "pnpm --filter remote-b dev",
+    "dev:shared": "pnpm --filter shared dev",
+    "build": "pnpm --filter shared build && pnpm --filter remote-a build && pnpm --filter remote-b build && pnpm --filter host build",
+    "build:remotes": "pnpm --filter shared build && pnpm --filter remote-a build && pnpm --filter remote-b build",
+    "preview": "pnpm clean:ports && pnpm -r --parallel preview",
+    "clean:ports": "lsof -ti:5000,5001,5002,5173 | xargs kill -9 2>/dev/null || true",
+    "lint": "pnpm -r lint",
+    "type-check": "pnpm -r type-check"
+  },
+  "keywords": [
+    "micro-frontend",
+    "mfe",
+    "vite",
+    "react",
+    "module-federation",
+    "zustand",
+    "typescript",
+    "tailwind"
+  ],
+  "author": "Luciano Monteiro",
+  "license": "MIT",
+  "packageManager": "pnpm@9.15.1",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@module-federation/vite": "^1.9.4"
+  }
+}
