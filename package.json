@@ -9,7 +9,7 @@
     "dev:remote-a": "pnpm --filter remote-a dev",
     "dev:remote-b": "pnpm --filter remote-b dev",
     "dev:shared": "pnpm --filter shared dev",
-    "build": "pnpm --filter shared build && pnpm --filter remote-a build && pnpm --filter remote-b build && pnpm --filter host build",
+    "build": "pnpm --filter shared build && pnpm --filter remote-a build && pnpm --filter remote-b build && pnpm --filter host build && rm -rf dist && mkdir -p dist && cp -r packages/host/dist/* dist/ && mkdir -p dist/remote-a && cp -r packages/remote-a/dist/* dist/remote-a/ && mkdir -p dist/remote-b && cp -r packages/remote-b/dist/* dist/remote-b/ && mkdir -p dist/shared && cp -r packages/shared/dist/* dist/shared/",
     "build:remotes": "pnpm --filter shared build && pnpm --filter remote-a build && pnpm --filter remote-b build",
     "preview": "pnpm clean:ports && pnpm -r --parallel preview",
     "clean:ports": "lsof -ti:5000,5001,5002,5173 | xargs kill -9 2>/dev/null || true",

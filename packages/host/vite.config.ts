@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { federation } from '@module-federation/vite'
 import path from 'path'
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   server: {
     port: 5000,
     strictPort: true,
@@ -13,7 +13,7 @@ export default defineConfig({
     port: 5000,
     strictPort: true,
   },
-  base: 'http://localhost:5000',
+  base: command === 'serve' ? 'http://localhost:5000' : '/',
   plugins: [
     react(),
     federation({
@@ -22,17 +22,17 @@ export default defineConfig({
         shared: {
           type: 'module',
           name: 'shared',
-          entry: 'http://localhost:5173/remoteEntry.js',
+          entry: command === 'serve' ? 'http://localhost:5173/remoteEntry.js' : '/shared/remoteEntry.js',
         },
         remoteA: {
           type: 'module',
           name: 'remoteA',
-          entry: 'http://localhost:5001/remoteEntry.js',
+          entry: command === 'serve' ? 'http://localhost:5001/remoteEntry.js' : '/remote-a/remoteEntry.js',
         },
         remoteB: {
           type: 'module',
           name: 'remoteB',
-          entry: 'http://localhost:5002/remoteEntry.js',
+          entry: command === 'serve' ? 'http://localhost:5002/remoteEntry.js' : '/remote-b/remoteEntry.js',
         },
       },
       shared: {
@@ -53,4 +53,4 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
   },
-})
+}))

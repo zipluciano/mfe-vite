@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import { federation } from '@module-federation/vite'
 import path from 'path'
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   server: {
     port: 5173,
     strictPort: true,
@@ -13,7 +13,7 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
   },
-  base: 'http://localhost:5173',
+  base: command === 'serve' ? 'http://localhost:5173' : '/shared/',
   plugins: [
     react(),
     federation({
@@ -43,4 +43,4 @@ export default defineConfig({
     minify: false,
     cssCodeSplit: false,
   },
-})
+}))
