@@ -4,6 +4,8 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
     "../shared/src/**/*.{js,ts,jsx,tsx}",
+    "../remote-a/src/**/*.{js,ts,jsx,tsx}",
+    "../remote-b/src/**/*.{js,ts,jsx,tsx}",
   ],
   darkMode: 'class',
   theme: {
